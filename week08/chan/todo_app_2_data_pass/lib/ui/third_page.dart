@@ -10,18 +10,16 @@ class ThirdPage extends StatefulWidget {
 class _ThirdPageState extends State<ThirdPage> {
   @override
   Widget build(BuildContext context) {
+    final String args = ModalRoute.of(context)!.settings.arguments as String;
+
     return Scaffold(
-      appBar: AppBar(title: Text('Third Page')),
-      body: Container(
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('두 번째 페이지로 이동하기')
-          )
+        appBar: AppBar(title: Text('Third Page')),
+        body: Container(
+            child: Center(
+                child: Text(args,
+                    style: TextStyle(fontSize: 30))
+            )
         )
-      )
     );
   }
 }
