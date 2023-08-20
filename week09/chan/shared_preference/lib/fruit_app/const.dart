@@ -1,0 +1,1 @@
+const key = 'fruit_key';
