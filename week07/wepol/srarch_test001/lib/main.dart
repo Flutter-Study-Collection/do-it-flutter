@@ -51,19 +51,34 @@ class _HttpApp extends State<HttpApp> {
                   itemBuilder: (context, index) {
                     return Card(
                       child: Container(
-                        child: Column(
+                        child: Row(
                           children: <Widget>[
-                            Text(data![index]['title'].toString()),
-                            Text(data![index]['authors'].toString()),
-                            Text(data![index]['sale_price'].toString()),
-                            Text(data![index]['status'].toString()),
                             Image.network(
                               data![index]['thumbnail'],
                               height: 100,
                               width: 100,
                               fit: BoxFit.contain,
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 150,
+                                  child: Text(
+                                    data![index]['title'].toString(),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Text(
+                                    '저자 : ${data![index]['authors'].toString()}'),
+                                Text(
+                                    '가격 : ${data![index]['sale_price'].toString()}'),
+                                Text(
+                                    '판매중 : ${data![index]['status'].toString()}'),
+                              ],
                             )
                           ],
+                          mainAxisAlignment: MainAxisAlignment.start,
                         ),
                       ),
                     );
@@ -81,11 +96,13 @@ class _HttpApp extends State<HttpApp> {
   }
 
   Future<String> getJSONData() async {
-    var url = 'https://dapi.kakao.com/v3/search/book??target=title&query=doit';
+    var url = 'https://dapi.kakao.com/v3/search/book?target=title&query=doit';
     var response = await http.get(Uri.parse(url),
-        headers: {"Authorization": "kakaoAK 4b97ad6ec4917116c065cd6f66510d48"});
+        headers: {"Authorization": "KakaoAK 4b97ad6ec4917116c065cd6f66510d48"});
     setState(() {
       var dataConvertedToJSON = json.decode(response.body);
+      print(dataConvertedToJSON);
+
       List result = dataConvertedToJSON['documents'];
       // 이부분에서 null 문제발생
       data!.addAll(result);
