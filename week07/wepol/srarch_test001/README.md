@@ -1,16 +1,6 @@
-# srarch_test001
+1. web이란 무엇인가?
+1990년 초 유럽입자연구소에서 개발
+팀버너스가 웹서버와 웹브라우져를 개발
+웹서버와 웹브라우져의 정보를 표현하는 언어 HTML
+웹서버와 웹브라우져를 연결하는 통신 규약은 http
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
