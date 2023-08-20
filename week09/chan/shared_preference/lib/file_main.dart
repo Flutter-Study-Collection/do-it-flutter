@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,20 +35,22 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _setData(int value) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setInt(key, value);
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/count.txt');
+    file.writeAsStringSync(_counter.toString());
   }
 
   void _loadData() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      final value = pref.getInt(key);
-      if (value == null) {
-        _counter = 0;
-      } else {
-        _counter = value;
-      }
-    });
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final file = await File('${dir.path}/count.txt').readAsString();
+      print(file);
+      setState(() {
+        _counter = int.parse(file);
+      });
+    } catch (e){
+      print(e.toString());
+    }
   }
 
   void _incrementCounter() {
@@ -54,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
       _setData(_counter);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
   }
 
   @override
